@@ -153,5 +153,15 @@ else
 	echo "meta-networking layer already exists"
 fi
 
+#add i2c-test layer
+bitbake-layers show-layers | grep "meta-i2ctest" > /dev/null
+layer_info=$?
+
+if [ $layer_info -ne 0 ];then
+        echo "Adding meta-i2ctest layer"
+        bitbake-layers add-layer ../meta-i2ctest
+else
+        echo "meta-i2ctest layer already exists"
+fi
 set -e
 bitbake core-image-base
