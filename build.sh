@@ -110,11 +110,6 @@ else
         echo "${AUTOLOAD_I2C} already exists in the local.conf file"
 fi
 ##############################################
-# Add firmware aupport
-IMAGE_ADD="IMAGE_INSTALL:append = \"linux-firmware-rpidistro-bcm43430 v4l-utils python3 ntp wpa-supplicant libgpiod libgpiod-tools libgpiod-dev\""
-cat conf/local.conf | grep "${IMAGE_ADD}" > /dev/null
-local_imgadd_info=$?
-
 # Add ssh support
 IMAGE_F="IMAGE_FEATURES += \"ssh-server-openssh\""
 cat conf/local.conf | grep "${IMAGE_F}" > /dev/null
