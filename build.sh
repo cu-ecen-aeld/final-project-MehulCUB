@@ -184,4 +184,6 @@ else
 fi
 
 set -e
-bitbake core-image-base
+#bitbake core-image-base
+building sato-image for GUI support
+#bitbake core-image-sato
