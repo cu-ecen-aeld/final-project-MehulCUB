@@ -26,7 +26,7 @@ cat conf/local.conf | grep "${DISTRO_F}" > /dev/null
 local_distro_info=$?
 
 # Add firmware aupport
-IMAGE_ADD="IMAGE_INSTALL:append = \"linux-firmware-rpidistro-bcm43430 mosquitto-clients python3-paho-mqtt v4l-utils python3 ntp wpa-supplicant libgpiod libgpiod-tools libgpiod-dev i2c-tools libi2c-dev\""
+IMAGE_ADD="IMAGE_INSTALL:append = \"linux-firmware-rpidistro-bcm43430 mosquitto-clients python3-paho-mqtt v4l-utils python3 ntp wpa-supplicant libgpiod libgpiod-tools libgpiod-dev i2c-tools \""
 cat conf/local.conf | grep "${IMAGE_ADD}" > /dev/null
 local_imgadd_info=$?
 
@@ -44,6 +44,11 @@ local_i2c_info=$?
 AUTOLOAD_I2C="KERNEL_MODULE_AUTOLOAD:rpi += \"i2c-dev i2c-bcm2708\""
 cat conf/local.conf | grep "${AUTOLOAD_I2C}" > /dev/null
 local_i2c_autoload_info=$?
+
+# Add support for X11 
+DISTRO_FE=DISTRO_FEATURES_append = " x11"
+cat conf/local.conf | grep "${DISTRO_FE}" > /dev/null
+local_distro_info=$?
 
 ##############################################
 #Add if support is missing in the local.conf file 
@@ -111,7 +116,12 @@ else
 fi
 
 ##################################################
-
+if [ $local_distro_info -ne 0 ];then
+        echo "Append ${DISTRO_FE} in the local.conf file"
+        echo ${DISTRO_FE} >> conf/local.conf
+else
+        echo "${DISTRO_FE} already exists in the local.conf file"
+fi
 
 ##############################################
 # Add ssh support
