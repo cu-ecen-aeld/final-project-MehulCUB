@@ -26,7 +26,7 @@ cat conf/local.conf | grep "${DISTRO_F}" > /dev/null
 local_distro_info=$?
 
 # Add firmware aupport
-IMAGE_ADD="IMAGE_INSTALL:append = \"linux-firmware-rpidistro-bcm43430 mosquitto-clients python3-paho-mqtt v4l-utils python3 ntp wpa-supplicant libgpiod libgpiod-tools libgpiod-dev i2c-tools\""
+IMAGE_ADD="IMAGE_INSTALL:append = \"linux-firmware-rpidistro-bcm43430 mosquitto-clients python3-paho-mqtt v4l-utils python3 ntp wpa-supplicant libgpiod libgpiod-tools libgpiod-dev i2c-tools libi2c-dev\""
 cat conf/local.conf | grep "${IMAGE_ADD}" > /dev/null
 local_imgadd_info=$?
 
@@ -109,6 +109,10 @@ if [ $local_i2c_autoload_info -ne 0 ];then
 else
         echo "${AUTOLOAD_I2C} already exists in the local.conf file"
 fi
+
+##################################################
+
+
 ##############################################
 # Add ssh support
 IMAGE_F="IMAGE_FEATURES += \"ssh-server-openssh\""
