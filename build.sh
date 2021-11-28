@@ -45,10 +45,18 @@ AUTOLOAD_I2C="KERNEL_MODULE_AUTOLOAD:rpi += \"i2c-dev i2c-bcm2708\""
 cat conf/local.conf | grep "${AUTOLOAD_I2C}" > /dev/null
 local_i2c_autoload_info=$?
 
+# Adding user application packages to image
+#CORE_IM_ADD="CORE_IMAGE_EXTRA_INSTALL += \"bme-config i2ctest-config\""
+CORE_IM_ADD="CORE_IMAGE_EXTRA_INSTALL += \"bme-config i2ctest-config\""
+cat conf/local.conf | grep "${CORE_IM_ADD}" > /dev/null
+local_coreimadd_info=$?
+
 # Add support for X11
 DISTRO_FE=DISTRO_FEATURES_append = " x11"
 cat conf/local.conf | grep "${DISTRO_FE}" > /dev/null
 local_distro_info=$?
+
+
 ##########################################
 #Add if support is missing in the local.conf file 
 if [ $local_conf_info -ne 0 ];then
@@ -184,6 +192,6 @@ else
 fi
 
 set -e
-bitbake core-image-base
+#bitbake core-image-base
 #building sato-image for GUI support
-#bitbake core-image-sato
+bitbake core-image-sato
