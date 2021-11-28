@@ -191,6 +191,17 @@ else
         echo "meta-i2ctest layer already exists"
 fi
 
+#add meta-bme layer
+bitbake-layers show-layers | grep "meta-bme" > /dev/null
+layer_info=$?
+
+if [ $layer_info -ne 0 ];then
+        echo "Adding meta-bme layer"
+        bitbake-layers add-layer ../meta-bme
+else
+        echo "meta-bme layer already exists"
+fi
+
 set -e
 #bitbake core-image-base
 #building sato-image for GUI support
