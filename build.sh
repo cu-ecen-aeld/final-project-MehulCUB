@@ -46,8 +46,8 @@ cat conf/local.conf | grep "${AUTOLOAD_I2C}" > /dev/null
 local_i2c_autoload_info=$?
 
 # Adding user application packages to image
-#CORE_IM_ADD="CORE_IMAGE_EXTRA_INSTALL += \"bme-config i2ctest-config\""
-CORE_IM_ADD="CORE_IMAGE_EXTRA_INSTALL += \"bme-config i2ctest-config\""
+#CORE_IM_ADD="CORE_IMAGE_EXTRA_INSTALL += \"bme-config\""
+CORE_IM_ADD="CORE_IMAGE_EXTRA_INSTALL += \"bme-config\""
 cat conf/local.conf | grep "${CORE_IM_ADD}" > /dev/null
 local_coreimadd_info=$?
 
@@ -181,15 +181,15 @@ else
 fi
 
 #add i2c-test layer
-bitbake-layers show-layers | grep "meta-i2ctest" > /dev/null
-layer_info=$?
+# bitbake-layers show-layers | grep "meta-i2ctest" > /dev/null
+# layer_info=$?
 
-if [ $layer_info -ne 0 ];then
-        echo "Adding meta-i2ctest layer"
-        bitbake-layers add-layer ../meta-i2ctest
-else
-        echo "meta-i2ctest layer already exists"
-fi
+# if [ $layer_info -ne 0 ];then
+        # echo "Adding meta-i2ctest layer"
+        # bitbake-layers add-layer ../meta-i2ctest
+# else
+        # echo "meta-i2ctest layer already exists"
+# fi
 
 #add meta-bme layer
 bitbake-layers show-layers | grep "meta-bme" > /dev/null
@@ -206,3 +206,4 @@ set -e
 #bitbake core-image-base
 #building sato-image for GUI support
 bitbake core-image-sato
+
