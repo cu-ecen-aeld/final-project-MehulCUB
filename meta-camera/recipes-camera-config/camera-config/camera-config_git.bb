@@ -42,7 +42,6 @@ do_install () {
 	# and
 	# https://www.yoctoproject.org/docs/latest/ref-manual/ref-manual.html#var-S
 	# See example at https://github.com/cu-ecen-aeld/ecen5013-yocto/blob/ecen5013-hello-world/meta-ecen5013/recipes-ecen5013/ecen5013-hello-world/ecen5013-hello-world_git.bb
- 
 	install -d ${D}${bindir}
 	install -m 0755 ${B}/capture ${D}${bindir}/											   
 }
