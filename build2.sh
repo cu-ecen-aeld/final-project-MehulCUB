@@ -226,6 +226,16 @@ else
         echo "meta-custom layer already exists"
 fi
 
+#add meta-camera layer
+bitbake-layers show-layers | grep "meta-camera" > /dev/null
+layer_camera_info=$?
+
+if [ $layer_camera_info -ne 0 ];then
+	echo "Adding meta-camera layer"
+	bitbake-layers add-layer ../meta-camera
+else
+	echo "meta-camera layer already exists"
+fi
 
 set -e
 #bitbake core-image-base
