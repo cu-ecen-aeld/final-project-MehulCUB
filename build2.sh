@@ -46,8 +46,7 @@ cat conf/local.conf | grep "${AUTOLOAD_I2C}" > /dev/null
 local_i2c_autoload_info=$?
 
 # Adding user application packages to image
-#CORE_IM_ADD="CORE_IMAGE_EXTRA_INSTALL += \"bme-config\""
-CORE_IM_ADD="CORE_IMAGE_EXTRA_INSTALL += \"bme-config\""
+CORE_IM_ADD="CORE_IMAGE_EXTRA_INSTALL += \"bme-config capture\""
 cat conf/local.conf | grep "${CORE_IM_ADD}" > /dev/null
 local_coreimadd_info=$?
 
