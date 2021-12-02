@@ -3,6 +3,7 @@
 # Author: Siddhant Jajoo.
 # Modified : Mehul Patel
 # reference: https://github.com/cu-ecen-aeld/yocto-assignments-base/wiki/Build-basic-YOCTO-image-for-RaspberryPi
+
 git submodule init
 git submodule sync
 git submodule update
@@ -25,8 +26,28 @@ DISTRO_F="DISTRO_FEATURES:append = \"wifi\""
 cat conf/local.conf | grep "${DISTRO_F}" > /dev/null
 local_distro_info=$?
 
-# Add firmware aupport
-IMAGE_ADD="IMAGE_INSTALL:append = \"linux-firmware-rpidistro-bcm43430 mosquitto-clients python3-paho-mqtt v4l-utils python3 ntp wpa-supplicant libgpiod libgpiod-tools libgpiod-dev i2c-tools\""
+# Add firmware aupport plus add camera related package support
+# For image compression tool support - imagemagick  for Yocto took reference from Mukta Darekar's work on it 
+# reference : https://github.com/cu-ecen-aeld/final-project-MuktaDarekar
+
+#IMAGE_ADD="IMAGE_INSTALL:append = \"linux-firmware-rpidistro-bcm43430 mosquitto-clients python3-paho-mqtt v4l-utils python3 ntp wpa-supplicant libgpiod libgpiod-tools libgpiod-dev i2c-tools\""
+IMAGE_ADD="IMAGE_INSTALL:append = \"linux-firmware-rpidistro-bcm43430 
+									mosquitto-clients python3-paho-mqtt 
+									v4l-utils python3 ntp wpa-supplicant 
+									libgpiod libgpiod-tools libgpiod-dev 
+									i2c-tools
+									fbida fbgrab ffmpeg imagemagick gstreamer1.0 
+									gstreamer1.0-plugins-good gstreamer1.0-plugins-base  
+									gstreamer1.0-plugins-ugly gstreamer1.0-libav gst-player
+									gstreamer1.0-meta-base gst-examples gstreamer1.0-rtsp-server\""
+
+
+#Licence
+LICENCE="LICENSE_FLAGS_WHITELIST = \"commercial\""
+
+#this is required so that gstreamer1.0-plugins-ugly can be added to the image
+LICENSE:append = " commercial_gstreamer1.0-plugins-ugly commercial_mpg123"
+
 cat conf/local.conf | grep "${IMAGE_ADD}" > /dev/null
 local_imgadd_info=$?
 
@@ -240,3 +261,4 @@ set -e
 #bitbake core-image-base
 #building sato-image for GUI support
 bitbake core-image-sato
+
