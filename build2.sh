@@ -27,19 +27,9 @@ cat conf/local.conf | grep "${DISTRO_F}" > /dev/null
 local_distro_info=$?
 
 # Add firmware aupport plus add camera related package support
-# For image compression tool support - imagemagick  for Yocto took reference from Mukta Darekar's work on it 
-# reference : https://github.com/cu-ecen-aeld/final-project-MuktaDarekar
 
-#IMAGE_ADD="IMAGE_INSTALL:append = \"linux-firmware-rpidistro-bcm43430 mosquitto-clients python3-paho-mqtt v4l-utils python3 ntp wpa-supplicant libgpiod libgpiod-tools libgpiod-dev i2c-tools\""
-IMAGE_ADD="IMAGE_INSTALL:append = \"linux-firmware-rpidistro-bcm43430 
-									mosquitto-clients python3-paho-mqtt 
-									v4l-utils python3 ntp wpa-supplicant 
-									libgpiod libgpiod-tools libgpiod-dev 
-									i2c-tools
-									fbida fbgrab ffmpeg imagemagick gstreamer1.0 
-									gstreamer1.0-plugins-good gstreamer1.0-plugins-base  
-									gstreamer1.0-plugins-ugly gstreamer1.0-libav gst-player
-									gstreamer1.0-meta-base gst-examples gstreamer1.0-rtsp-server\""
+IMAGE_ADD="IMAGE_INSTALL:append = \"linux-firmware-rpidistro-bcm43430 mosquitto-clients python3-paho-mqtt v4l-utils python3 ntp wpa-supplicant libgpiod libgpiod-tools libgpiod-dev i2c-tools\""
+IMAGE_ADD="IMAGE_INSTALL:append = \" fbida fbgrab imagemagick\""
 
 
 #Licence
@@ -261,4 +251,3 @@ set -e
 #bitbake core-image-base
 #building sato-image for GUI support
 bitbake core-image-sato
-
