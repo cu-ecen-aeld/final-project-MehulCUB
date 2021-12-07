@@ -28,7 +28,7 @@ local_distro_info=$?
 
 # Add firmware aupport plus add camera related package support
 
-IMAGE_ADD="IMAGE_INSTALL:append = \"linux-firmware-rpidistro-bcm43430 mosquitto mosquitto-clients python3-paho-mqtt nano v4l-utils python3 ntp wpa-supplicant libgpiod libgpiod-tools libgpiod-dev i2c-tools fbida fbgrab imagemagick\""
+IMAGE_ADD="IMAGE_INSTALL:append = \"linux-firmware-rpidistro-bcm43430 mosquitto mosquitto-clients python3-paho-mqtt python3-rpi-bme280 python3-smbus2 nano v4l-utils python3 ntp wpa-supplicant libgpiod libgpiod-tools libgpiod-dev i2c-tools fbida fbgrab imagemagick\""
 
 #Licence
 LICENCE="LICENSE_FLAGS_WHITELIST = \"commercial\""
@@ -66,9 +66,9 @@ local_distro_info=$?
 
 
 # Adding python packages to image
-CORE_IM_ADD1="CORE_IMAGE_EXTRA_INSTALL += \"python-helloworld_1.0\""
-cat conf/local.conf | grep "${CORE_IM_ADD}1" > /dev/null
-local_coreimadd_info=$?
+#CORE_IM_ADD1="CORE_IMAGE_EXTRA_INSTALL += \"python-helloworld_1.0\""
+#cat conf/local.conf | grep "${CORE_IM_ADD}1" > /dev/null
+#local_coreimadd_info=$?
 
 ##########################################
 #Add if support is missing in the local.conf file 
@@ -243,6 +243,17 @@ if [ $layer_camera_info -ne 0 ];then
 	bitbake-layers add-layer ../meta-camera
 else
 	echo "meta-camera layer already exists"
+fi
+
+#add meta-python-modules layer
+bitbake-layers show-layers | grep "meta-python-modules" > /dev/null
+layer_info=$?
+
+if [ $layer_info -ne 0 ];then
+        echo "Adding meta-python-modules layer"
+        bitbake-layers add-layer ../meta-python-modules
+else
+        echo "meta-python-modules layer already exists"
 fi
 
 set -e
