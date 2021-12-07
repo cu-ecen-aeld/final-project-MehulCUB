@@ -28,7 +28,7 @@ local_distro_info=$?
 
 # Add firmware aupport plus add camera related package support
 
-IMAGE_ADD="IMAGE_INSTALL:append = \"linux-firmware-rpidistro-bcm43430 mosquitto mosquitto-clients python3-paho-mqtt python3-rpi-bme280 python3-smbus2 nano v4l-utils python3 ntp wpa-supplicant libgpiod libgpiod-tools libgpiod-dev i2c-tools fbida fbgrab imagemagick\""
+IMAGE_ADD="IMAGE_INSTALL:append = \"linux-firmware-rpidistro-bcm43430 mosquitto mosquitto-clients python3-paho-mqtt python3-rpi-bme280 python3-smbus2 python3-project-scripts nano v4l-utils python3 ntp wpa-supplicant libgpiod libgpiod-tools libgpiod-dev i2c-tools fbida fbgrab imagemagick\""
 
 #Licence
 LICENCE="LICENSE_FLAGS_WHITELIST = \"commercial\""
