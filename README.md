@@ -1,7 +1,7 @@
 # AESD Final Project - Fall 2021
 This repository contains the contents for the course Advanced Embedded Software Development (ECEN 5713) Final Project.
 
-# Repository Information
+## Repository Information
 Repository contains Yocto based custom linux envrionemnt setup for Raspberry Pi 4 
 
 ## Project Overview
